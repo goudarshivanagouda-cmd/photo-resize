@@ -1,0 +1,282 @@
+<!-- ===== ಕಸ್ಟಮ್ ಕ್ರಾಪ್ & ಸ್ಮಾರ್ಟ್ ರಿಸೈಜರ್ : Blogger HTML ===== -->
+<!-- ಬಳಕೆ: Blogger → Post/Page → "HTML view" ಆಯ್ಕೆಮಾಡಿ → ಈ ಪೂರ್ತಿ ಕೋಡ್ ಪೇಸ್ಟ್ ಮಾಡಿ → Publish -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+#csr-app, #csr-app * { box-sizing: border-box; font-family: 'Noto Sans Kannada', Arial, sans-serif; }
+#csr-app { max-width: 900px; margin: 20px auto; background: #fff; border-radius: 22px; box-shadow: 0 10px 40px rgba(15,40,100,.15); overflow: hidden; border-top: 12px solid #2563eb; color: #1e293b; }
+#csr-app .csr-body { padding: 28px 32px 24px; }
+#csr-app h2 { text-align: center; color: #1e3a8a; font-size: 28px; margin: 0 0 6px; font-weight: 700; }
+#csr-app .csr-sub { text-align: center; color: #475569; font-weight: 600; margin: 0 0 22px; font-size: 15px; }
+#csr-drop { border: 2px dashed #3b82f6; background: #dbeafe; border-radius: 16px; padding: 48px 16px; text-align: center; cursor: pointer; transition: .2s; }
+#csr-drop.csr-over, #csr-drop:hover { background: #bfdbfe; }
+#csr-drop .csr-ico { font-size: 54px; line-height: 1; }
+#csr-drop .csr-t1 { color: #1e3a8a; font-weight: 700; font-size: 18px; margin-top: 14px; }
+#csr-drop .csr-t2 { color: #2563eb; font-weight: 600; font-size: 14px; margin-top: 4px; }
+#csr-editor { display: none; }
+#csr-wrap { text-align: center; background: #0f172a; border-radius: 12px; padding: 10px; }
+#csr-canvas { max-width: 100%; touch-action: none; cursor: crosshair; border-radius: 6px; }
+.csr-hint { text-align: center; font-size: 13px; color: #64748b; margin: 8px 0 14px; }
+.csr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.csr-grid label { display: block; font-size: 13px; font-weight: 700; color: #334155; margin-bottom: 4px; }
+.csr-grid input, .csr-grid select { width: 100%; padding: 9px 10px; border: 1.5px solid #cbd5e1; border-radius: 9px; font-size: 14px; background: #fff; }
+.csr-grid input:focus, .csr-grid select:focus { outline: none; border-color: #2563eb; }
+.csr-btn { background: #2563eb; color: #fff; border: 0; padding: 12px 22px; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; margin: 4px 6px 4px 0; }
+.csr-btn:hover { background: #1d4ed8; }
+.csr-btn.csr-green { background: #16a34a; } .csr-btn.csr-green:hover { background: #15803d; }
+#csr-result { display: none; text-align: center; margin-top: 18px; padding: 16px; background: #f1f5f9; border-radius: 12px; }
+#csr-result img { max-width: 100%; max-height: 320px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; }
+#csr-info { font-weight: 700; color: #0f766e; margin: 10px 0; font-size: 14px; }
+#csr-reset { text-align: center; margin-top: 20px; font-weight: 700; font-size: 15px; }
+#csr-reset a { color: #1e3a8a; text-decoration: underline; cursor: pointer; }
+#csr-app .csr-foot { background: #f1f5f9; text-align: center; padding: 18px; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #475569; }
+</style>
+
+<div id="csr-app">
+  <div class="csr-body">
+    <h2>ಕಸ್ಟಮ್ ಕ್ರಾಪ್ &amp; ಸ್ಮಾರ್ಟ್ ರಿಸೈಜರ್</h2>
+    <p class="csr-sub">ಫೋಟೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ, ಕ್ರಾಪ್ ಮಾಡಿ, ಸೈಜ್ ಹಾಗೂ ಹೆಸರು ನಮೂದಿಸಿ.</p>
+
+    <div id="csr-drop">
+      <div class="csr-ico">📷</div>
+      <div class="csr-t1">ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ ಫೋಟೋ ಆಯ್ಕೆಮಾಡಿ</div>
+      <div class="csr-t2">(ಅಥವಾ ಫೋಟೋವನ್ನು ಇಲ್ಲಿಗೆ ಎಳೆಯಿರಿ)</div>
+      <input type="file" id="csr-file" accept="image/*" style="display:none">
+    </div>
+
+    <div id="csr-editor">
+      <div id="csr-wrap"><canvas id="csr-canvas"></canvas></div>
+      <div class="csr-hint">ಫೋಟೋ ಮೇಲೆ ಮೌಸ್/ಬೆರಳಿನಿಂದ ಎಳೆದು ಕ್ರಾಪ್ ಪ್ರದೇಶ ಆರಿಸಿ. ಮೂಲೆಗಳನ್ನು ಎಳೆದು ಗಾತ್ರ ಬದಲಿಸಿ, ಒಳಗೆ ಎಳೆದು ಸರಿಸಿ.</div>
+
+      <div class="csr-grid">
+        <div><label>ಕ್ರಾಪ್ ಅನುಪಾತ</label>
+          <select id="csr-ratio">
+            <option value="free">ಮುಕ್ತ (Free)</option>
+            <option value="1">1 : 1 (ಚೌಕ)</option>
+            <option value="0.75">3 : 4</option>
+            <option value="1.3333">4 : 3</option>
+            <option value="1.7778">16 : 9</option>
+            <option value="size">ಕೆಳಗಿನ ಅಗಲ × ಎತ್ತರದಂತೆ</option>
+          </select></div>
+        <div><label>ಅಗಲ (Width px)</label><input type="number" id="csr-w" min="1"></div>
+        <div><label>ಎತ್ತರ (Height px)</label><input type="number" id="csr-h" min="1"></div>
+        <div><label>ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ (KB) - ಐಚ್ಛಿಕ</label><input type="number" id="csr-kb" min="5" placeholder="ಉದಾ: 50"></div>
+        <div><label>ಫೈಲ್ ಹೆಸರು</label><input type="text" id="csr-name" placeholder="ಉದಾ: student-photo"></div>
+        <div><label>ಫಾರ್ಮ್ಯಾಟ್</label>
+          <select id="csr-fmt"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option></select></div>
+      </div>
+
+      <button class="csr-btn" id="csr-go">✂️ ಕ್ರಾಪ್ ಮಾಡಿ &amp; ನೋಡಿ</button>
+
+      <div id="csr-result">
+        <img id="csr-prev" alt="ಫಲಿತಾಂಶ">
+        <div id="csr-info"></div>
+        <a id="csr-dl" class="csr-btn csr-green" style="display:inline-block;text-decoration:none">⬇️ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ</a>
+      </div>
+    </div>
+
+    <div id="csr-reset">🔄 <a id="csr-reset-a">ಹೊಸದಾಗಿ ಪ್ರಾರಂಭಿಸಿ</a> (<a id="csr-reset-b">Reset App</a>)</div>
+  </div>
+  <div class="csr-foot">CREATED BY : SHIVANAGOUDAGOUDAR.BLOGSPOT.COM</div>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var drop = $('csr-drop'), file = $('csr-file'), editor = $('csr-editor'),
+      cv = $('csr-canvas'), ctx = cv.getContext('2d'),
+      ratioSel = $('csr-ratio'), wIn = $('csr-w'), hIn = $('csr-h'),
+      kbIn = $('csr-kb'), nameIn = $('csr-name'), fmtSel = $('csr-fmt'),
+      result = $('csr-result'), prev = $('csr-prev'), info = $('csr-info'), dl = $('csr-dl');
+
+  var img = null, scale = 1, crop = null, mode = null, anchor = null, off = null,
+      touched = false, lastURL = null;
+
+  function getRatio() {
+    var v = ratioSel.value;
+    if (v === 'free') return 0;
+    if (v === 'size') { var w = +wIn.value, h = +hIn.value; return (w > 0 && h > 0) ? w / h : 0; }
+    return parseFloat(v);
+  }
+
+  function loadFile(f) {
+    if (!f || f.type.indexOf('image') !== 0) { alert('ದಯವಿಟ್ಟು ಫೋಟೋ ಫೈಲ್ ಆಯ್ಕೆಮಾಡಿ.'); return; }
+    var im = new Image();
+    im.onload = function () {
+      img = im;
+      var maxW = Math.max(250, Math.min(840, ($('csr-app').clientWidth || 700) - 90));
+      scale = Math.min(maxW / im.naturalWidth, 520 / im.naturalHeight, 1);
+      cv.width = Math.round(im.naturalWidth * scale);
+      cv.height = Math.round(im.naturalHeight * scale);
+      drop.style.display = 'none';
+      editor.style.display = 'block';
+      result.style.display = 'none';
+      nameIn.value = (f.name || 'photo').replace(/\.[^.]+$/, '') + '-edited';
+      touched = false;
+      resetCrop();
+    };
+    im.src = URL.createObjectURL(f);
+  }
+
+  function resetCrop() {
+    var r = getRatio(), W = cv.width, H = cv.height, w, h;
+    if (r) { w = W; h = w / r; if (h > H) { h = H; w = h * r; } }
+    else { w = W * 0.8; h = H * 0.8; }
+    w *= (r ? 0.9 : 1); h *= (r ? 0.9 : 1);
+    crop = { x: (W - w) / 2, y: (H - h) / 2, w: w, h: h };
+    syncSize(true);
+    draw();
+  }
+
+  function syncSize(force) {
+    if (!crop) return;
+    var nw = Math.round(crop.w / scale), nh = Math.round(crop.h / scale);
+    if (ratioSel.value === 'size') return;
+    if (force || !touched) { wIn.value = nw; hIn.value = nh; }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.drawImage(img, 0, 0, cv.width, cv.height);
+    ctx.fillStyle = 'rgba(0,0,0,.55)';
+    ctx.fillRect(0, 0, cv.width, crop.y);
+    ctx.fillRect(0, crop.y + crop.h, cv.width, cv.height - crop.y - crop.h);
+    ctx.fillRect(0, crop.y, crop.x, crop.h);
+    ctx.fillRect(crop.x + crop.w, crop.y, cv.width - crop.x - crop.w, crop.h);
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+    ctx.strokeRect(crop.x, crop.y, crop.w, crop.h);
+    ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255,255,255,.4)';
+    for (var i = 1; i < 3; i++) {
+      ctx.beginPath(); ctx.moveTo(crop.x + crop.w * i / 3, crop.y); ctx.lineTo(crop.x + crop.w * i / 3, crop.y + crop.h); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(crop.x, crop.y + crop.h * i / 3); ctx.lineTo(crop.x + crop.w, crop.y + crop.h * i / 3); ctx.stroke();
+    }
+    ctx.fillStyle = '#2563eb';
+    corners().forEach(function (c) { ctx.fillRect(c[0] - 6, c[1] - 6, 12, 12); });
+  }
+
+  function corners() {
+    return [[crop.x, crop.y], [crop.x + crop.w, crop.y], [crop.x, crop.y + crop.h], [crop.x + crop.w, crop.y + crop.h]];
+  }
+
+  function pos(e) {
+    var r = cv.getBoundingClientRect();
+    return { x: (e.clientX - r.left) * cv.width / r.width, y: (e.clientY - r.top) * cv.height / r.height };
+  }
+
+  function applyDrag(p) {
+    var r = getRatio(), W = cv.width, H = cv.height;
+    var dx = p.x - anchor.x, dy = p.y - anchor.y;
+    var sx = dx >= 0 ? 1 : -1, sy = dy >= 0 ? 1 : -1;
+    var ax = Math.abs(dx), ay = Math.abs(dy);
+    var maxX = sx > 0 ? W - anchor.x : anchor.x, maxY = sy > 0 ? H - anchor.y : anchor.y;
+    if (r) {
+      if (ax / r > ay) ay = ax / r; else ax = ay * r;
+      var k = Math.min(1, maxX / (ax || 1), maxY / (ay || 1));
+      ax *= k; ay *= k;
+    } else { ax = Math.min(ax, maxX); ay = Math.min(ay, maxY); }
+    crop.x = sx > 0 ? anchor.x : anchor.x - ax;
+    crop.y = sy > 0 ? anchor.y : anchor.y - ay;
+    crop.w = Math.max(ax, 1); crop.h = Math.max(ay, 1);
+  }
+
+  cv.addEventListener('pointerdown', function (e) {
+    if (!img) return;
+    cv.setPointerCapture(e.pointerId);
+    var p = pos(e), cs = corners(), opp = [3, 2, 1, 0];
+    for (var i = 0; i < 4; i++) {
+      if (Math.abs(p.x - cs[i][0]) < 16 && Math.abs(p.y - cs[i][1]) < 16) {
+        mode = 'resize'; anchor = { x: cs[opp[i]][0], y: cs[opp[i]][1] }; return;
+      }
+    }
+    if (p.x > crop.x && p.x < crop.x + crop.w && p.y > crop.y && p.y < crop.y + crop.h) {
+      mode = 'move'; off = { x: p.x - crop.x, y: p.y - crop.y };
+    } else { mode = 'new'; anchor = { x: p.x, y: p.y }; crop.w = 1; crop.h = 1; crop.x = p.x; crop.y = p.y; }
+  });
+  cv.addEventListener('pointermove', function (e) {
+    if (!mode) return;
+    var p = pos(e);
+    if (mode === 'move') {
+      crop.x = Math.max(0, Math.min(cv.width - crop.w, p.x - off.x));
+      crop.y = Math.max(0, Math.min(cv.height - crop.h, p.y - off.y));
+    } else applyDrag(p);
+    draw();
+  });
+  function endDrag() { if (mode) { mode = null; syncSize(false); } }
+  cv.addEventListener('pointerup', endDrag);
+  cv.addEventListener('pointercancel', endDrag);
+
+  ratioSel.addEventListener('change', function () { touched = false; resetCrop(); });
+  wIn.addEventListener('input', function () {
+    touched = true;
+    var r = getRatio();
+    if (r && ratioSel.value !== 'size') hIn.value = Math.round(wIn.value / r);
+    else if (ratioSel.value === 'size') resetCrop();
+  });
+  hIn.addEventListener('input', function () {
+    touched = true;
+    var r = getRatio();
+    if (r && ratioSel.value !== 'size') wIn.value = Math.round(hIn.value * r);
+    else if (ratioSel.value === 'size') resetCrop();
+  });
+
+  function makeBlob(canvas, type, maxKB, cb) {
+    if (type !== 'image/jpeg' || !maxKB) { canvas.toBlob(cb, type, 0.92); return; }
+    var lo = 0.05, hi = 0.95, best = null, n = 0;
+    (function step() {
+      var q = (lo + hi) / 2;
+      canvas.toBlob(function (b) {
+        if (b.size / 1024 <= maxKB) { best = b; lo = q; } else { hi = q; }
+        if (++n < 8) step(); else {
+          if (best) cb(best);
+          else canvas.toBlob(function (b2) { cb(b2); }, type, 0.05);
+        }
+      }, type, q);
+    })();
+  }
+
+  $('csr-go').addEventListener('click', function () {
+    if (!img) return;
+    var ow = Math.round(+wIn.value), oh = Math.round(+hIn.value);
+    if (!(ow > 0 && oh > 0)) { alert('ಸರಿಯಾದ ಅಗಲ ಮತ್ತು ಎತ್ತರ ನಮೂದಿಸಿ.'); return; }
+    var out = document.createElement('canvas');
+    out.width = ow; out.height = oh;
+    var c = out.getContext('2d');
+    var type = fmtSel.value;
+    if (type === 'image/jpeg') { c.fillStyle = '#fff'; c.fillRect(0, 0, ow, oh); }
+    c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high';
+    c.drawImage(img, crop.x / scale, crop.y / scale, crop.w / scale, crop.h / scale, 0, 0, ow, oh);
+    var maxKB = +kbIn.value || 0;
+    makeBlob(out, type, maxKB, function (blob) {
+      if (lastURL) URL.revokeObjectURL(lastURL);
+      lastURL = URL.createObjectURL(blob);
+      var ext = type === 'image/png' ? 'png' : 'jpg';
+      var nm = (nameIn.value.trim() || 'photo').replace(/[\\/:*?"<>|]/g, '_');
+      prev.src = lastURL;
+      dl.href = lastURL; dl.download = nm + '.' + ext;
+      var kb = (blob.size / 1024).toFixed(1);
+      info.textContent = 'ಗಾತ್ರ: ' + ow + ' × ' + oh + ' px  |  ಫೈಲ್ ಗಾತ್ರ: ' + kb + ' KB' +
+        (maxKB && blob.size / 1024 > maxKB ? '  (ಗುರಿ ' + maxKB + ' KB ತಲುಪಲು ಅಗಲ/ಎತ್ತರ ಕಡಿಮೆ ಮಾಡಿ)' : '');
+      result.style.display = 'block';
+      result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
+  function reset() {
+    img = null; crop = null; mode = null; touched = false;
+    file.value = ''; result.style.display = 'none'; editor.style.display = 'none';
+    drop.style.display = 'block';
+    wIn.value = hIn.value = kbIn.value = nameIn.value = '';
+    ratioSel.value = 'free'; fmtSel.value = 'image/jpeg';
+  }
+  $('csr-reset-a').onclick = reset; $('csr-reset-b').onclick = reset;
+
+  drop.addEventListener('click', function () { file.click(); });
+  file.addEventListener('change', function () { loadFile(file.files[0]); });
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('csr-over'); });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('csr-over'); });
+  });
+  drop.addEventListener('drop', function (e) { loadFile(e.dataTransfer.files[0]); });
+})();
+</script>
